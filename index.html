@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkoleSjakk JS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1><i class="fas fa-chess-king"></i> SkoleSjakk</h1>
+            <div class="status-bar" id="status">Hvit sin tur</div>
+        </header>
+
+        <div class="game-area">
+            <div id="board" class="board"></div>
+
+            <div class="controls">
+                <div class="mode-select">
+                    <label>Spillmodus:</label>
+                    <select id="game-mode">
+                        <option value="pvp">2 Spillere (Lokalt)</option>
+                        <option value="pvc">1 Spiller (mot Datamaskin)</option>
+                    </select>
+                </div>
+
+                <div class="toggle-container">
+                    <input type="checkbox" id="show-hints" checked>
+                    <label for="show-hints">Vis gyldige trekk</label>
+                </div>
+
+                <div class="captured-pieces">
+                    <div id="captured-white"></div>
+                    <div id="captured-black"></div>
+                </div>
+
+                <button id="reset-btn" class="btn"><i class="fas fa-redo"></i> Nytt Spill</button>
+                <button id="flip-btn" class="btn"><i class="fas fa-sync"></i> Snu brettet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
