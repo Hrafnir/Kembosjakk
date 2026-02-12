@@ -1,0 +1,135 @@
+:root {
+    --bg-color: #2c3e50;
+    --board-light: #ecf0f1;
+    --board-dark: #34495e; /* Mørkeblå/Grå */
+    --highlight: rgba(241, 196, 15, 0.6); /* Gul for markerte felt */
+    --hint: rgba(46, 204, 113, 0.6); /* Grønn prikk for gyldige trekk */
+    --white-piece: #fdfdfd;
+    --black-piece: #1a1a1a;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+header {
+    text-align: center;
+}
+
+.status-bar {
+    background: rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.game-area {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* --- SJAKKBRETTET --- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    border: 10px solid #4a3b32;
+    border-radius: 5px;
+    user-select: none; /* Kan ikke markere tekst */
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Farger på rutene */
+.square.light { background-color: var(--board-light); color: var(--board-dark); }
+.square.dark { background-color: var(--board-dark); color: var(--board-light); }
+
+/* Markeringer */
+.square.selected { background-color: var(--highlight) !important; }
+.square.last-move { box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.5); }
+
+/* Hint prikk */
+.hint-dot::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: var(--hint);
+    border-radius: 50%;
+    pointer-events: none;
+}
+/* Hint sirkel for trekk som fanger brikker */
+.hint-capture::after {
+    background-color: transparent;
+    border: 4px solid rgba(231, 76, 60, 0.7);
+    width: 40px;
+    height: 40px;
+}
+
+/* Brikkene */
+.piece {
+    cursor: grab;
+    transition: transform 0.1s;
+    /* Skygge for å gi 3D effekt på teksten */
+    filter: drop-shadow(2px 4px 2px rgba(0,0,0,0.4));
+}
+.piece.white { color: var(--white-piece); text-shadow: 0 0 2px black; }
+.piece.black { color: var(--black-piece); text-shadow: 0 0 2px white; }
+
+/* --- KONTROLLPANEL --- */
+.controls {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+#reset-btn { background-color: #27ae60; color: white; }
+#flip-btn { background-color: #3498db; color: white; }
+.btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+select, input { padding: 5px; border-radius: 4px; border: none; }
+.toggle-container { display: flex; align-items: center; gap: 10px; cursor: pointer;}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .board { grid-template-columns: repeat(8, 45px); grid-template-rows: repeat(8, 45px); }
+    .square { width: 45px; height: 45px; font-size: 30px; }
+}
